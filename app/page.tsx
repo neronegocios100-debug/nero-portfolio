@@ -327,13 +327,13 @@ function Header({
     <header className={`header ${compact ? "is-compact" : ""}`}>
       <a
         href="#top"
-        className={`logo ${tone === "light" ? "is-light" : ""}`}
+        className={`logo logo-image-link ${tone === "light" ? "is-light" : ""}`}
         onClick={(event) => {
           event.preventDefault();
           onNavigate("top");
         }}
       >
-        nero.
+        <img src="/brand/nero-wordmark.png" alt="Nero" />
       </a>
 
       <nav className="nav">
@@ -910,9 +910,7 @@ function WorkStrips({ resetKey }: { resetKey: number }) {
                     }
                     onPointerEnter={() => setActiveIndex(index)}
                     onPointerLeave={() => setActiveIndex(null)}
-                    onClick={() =>
-                      setExpandedIndex(isExpanded ? null : index)
-                    }
+                    onClick={() => setExpandedIndex(isExpanded ? null : index)}
                     onKeyDown={(event) => {
                       if (event.key === "Enter" || event.key === " ") {
                         event.preventDefault();
@@ -1761,6 +1759,55 @@ export default function NeroPortfolio() {
       .logo:hover {
         letter-spacing: 0.065em;
         transform: translateZ(0) scaleX(0.94);
+      }
+
+      .logo-image-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 82px;
+        height: auto;
+        opacity: 0.94;
+        transform: translateZ(0);
+      }
+
+      .header.is-compact .logo-image-link {
+        width: 74px;
+      }
+
+      .logo-image-link img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        user-select: none;
+        pointer-events: none;
+        filter:
+          drop-shadow(0 0 8px rgba(255, 255, 255, 0.08))
+          drop-shadow(0 0 16px rgba(90, 210, 255, 0.08));
+        transition:
+          opacity 260ms ease,
+          filter 320ms ease,
+          transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .logo-image-link:hover {
+        letter-spacing: initial;
+        transform: translateZ(0);
+      }
+
+      .logo-image-link:hover img {
+        opacity: 1;
+        transform: translateY(-1px) scale(1.025);
+        filter:
+          drop-shadow(0 0 10px rgba(255, 255, 255, 0.14))
+          drop-shadow(0 0 22px rgba(90, 210, 255, 0.14));
+      }
+
+      .logo-image-link.is-light img {
+        filter:
+          invert(1)
+          drop-shadow(0 0 8px rgba(22, 20, 18, 0.08));
       }
 
       .nav {
@@ -3482,6 +3529,10 @@ export default function NeroPortfolio() {
           padding: 24px 22px;
         }
 
+        .logo-image-link {
+          width: 70px;
+        }
+
         .nav {
           gap: 18px;
         }
@@ -3725,6 +3776,7 @@ export default function NeroPortfolio() {
       />
 
       <AboutWipe active={aboutWiping} />
+
       <AboutExperience
         active={aboutMode}
         progress={aboutProgress}
